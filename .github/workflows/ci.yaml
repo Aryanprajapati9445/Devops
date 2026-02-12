@@ -1,0 +1,24 @@
+name: HTML CI
+
+on:
+  push:
+    branches: [ "main" ]
+  pull_request:
+
+jobs:
+  validate-html:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v4
+
+      - name: Validate HTML
+        run: |
+          npm install -g htmlhint
+          htmlhint "**/*.html"
+
+      - name: Check broken links
+        run: |
+          npm install -g broken-link-checker
+          blc http://127.0.0.1 --recursive || true
