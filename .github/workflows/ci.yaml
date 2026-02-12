@@ -22,3 +22,6 @@ jobs:
         run: |
           npm install -g broken-link-checker
           blc http://127.0.0.1 --recursive || true
+      - name: Run command and print message
+        run: |
+          htmlhint "**/*.html" && echo "✅ HTML validation passed"
